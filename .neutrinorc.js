@@ -5,7 +5,7 @@ module.exports = {
       '@neutrinojs/vue',
       {
         html: {
-          title: 'iglivedesktop-website'
+          title: 'IG Live Desktop'
         }
       }
     ],
