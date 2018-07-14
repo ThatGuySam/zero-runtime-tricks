@@ -10,6 +10,7 @@
     "test": "neutrino test"
   },
   "dependencies": {
+    "@neutrinojs/style-loader": "^8.3.0",
     "vue": "^2.5.16"
   },
   "devDependencies": {
