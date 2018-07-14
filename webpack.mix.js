@@ -43,7 +43,10 @@ mix.webpackConfig({
 .sourceMaps()
 
 mix.browserSync({
-    proxy: process.env.APP_URL
+    proxy: false,
+    server: {
+      baseDir: '.'
+    }
 })
 
 mix.js('resources/assets/js/app.js', 'public/js')
