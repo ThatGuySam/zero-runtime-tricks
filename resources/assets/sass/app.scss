@@ -1,0 +1,27 @@
+// Fonts
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+//https://github.com/twbs/bootstrap/tree/v4.1.1
+
+// Bootstrap Common
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/buttons';
+
+// Variables
+@import "variables";
+
+// @import 'forms';
+
+body {
+  background: #4d05e8;
+  color: #fff;
+}

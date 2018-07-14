@@ -1,22 +1,44 @@
 {
-  "name": "iglivedesktop-website",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "build": "neutrino build",
-    "start": "neutrino start",
-    "lint": "neutrino lint",
-    "test": "neutrino test"
-  },
-  "dependencies": {
-    "@neutrinojs/style-loader": "^8.3.0",
-    "vue": "^2.5.16"
-  },
-  "devDependencies": {
-    "@neutrinojs/jest": "^8.3.0",
-    "@neutrinojs/standardjs": "^8.3.0",
-    "@neutrinojs/vue": "^8.3.0",
-    "neutrino": "^8.3.0"
-  }
+    "private": true,
+    "scripts": {
+        "start": "npm run production",
+        "clean": "npm cache clean --force",
+        "rebuild-sass": "npm rebuild node-sass --force",
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "lint": "./node_modules/.bin/eslint resources/assets/js --ext .vue",
+        "fix": "npm run lint -- --fix",
+        "stage": "yarn production && now --static",
+        "deploy-live": "now alias"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.24.4",
+        "browser-sync-webpack-plugin": "2.0.1",
+        "cross-env": "^5.1.5",
+        "eslint": "^5.0.0",
+        "eslint-config-standard": "^11.0.0",
+        "eslint-plugin-import": "^2.13.0",
+        "eslint-plugin-node": "^6.0.1",
+        "eslint-plugin-promise": "^3.8.0",
+        "eslint-plugin-standard": "^3.1.0",
+        "eslint-plugin-vue": "^4.5.0",
+        "laravel-mix": "^2.0"
+    },
+    "dependencies": {
+        "axios": "^0.18",
+        "bootstrap": "^4.1.1",
+        "is_js": "^0.9.0",
+        "jquery": "^3.2",
+        "lodash": "^4.17.4",
+        "now-env": "^3.0.4",
+        "popper.js": "^1.12",
+        "random-words": "^1.1.0",
+        "vue": "^2.5.7",
+        "vue-form": "^4.9.0"
+    }
 }
