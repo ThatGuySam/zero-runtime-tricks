@@ -1,0 +1,5 @@
+.sheet-container {
+  thead {
+    @include media-breakpoint-down(xs) { display: none; }
+  }
+}

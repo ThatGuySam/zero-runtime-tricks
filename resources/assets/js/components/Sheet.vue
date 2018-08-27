@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!loading" class="container">
+    <div v-if="!loading" class="sheet-container container">
       <template v-if="sheet">
         <div class="table-responsive-lg py-5">
           <form class="form-inline justify-content-end">
@@ -19,10 +19,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, i) in visibleRows">
-                  <td v-for="(value, key) in row" :scope="(i) ? 'row' : 'col'">
-                      <h3 class="heading small d-block d-md-none">{{ key }}</h3>
-                      <div class="body">{{ value }}</div>
+              <tr v-for="(row, i) in visibleRows" class="border-secondary border-bottom">
+                  <td v-for="(value, key) in row" :scope="(i) ? 'row' : 'col'" class="d-block d-sm-table-cell border-0">
+                      <h3 class="badge text-left d-block d-sm-none bg-dark p-3">{{ key }}</h3>
+                      <div class="body px-4 px-sm-0">{{ value }}</div>
                   </td>
               </tr>
             </tbody>
