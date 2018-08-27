@@ -1,15 +1,25 @@
 <template>
     <div v-if="!loading" class="container">
       <template v-if="sheet">
-        <div class="table-responsive-lg">
-          <table class="table table-hover table-dark">
-            <thead>
+        <div class="table-responsive-lg py-5">
+          <form class="form-inline justify-content-end">
+            <label class="sr-only" for="searchCapabilities">Search Capabilities</label>
+            <input
+              type="text"
+              class="form-control text-light bg-transparent mb-2 ml-sm-2"
+              id="searchCapabilities"
+              placeholder="Search"
+
+              v-model="search">
+          </form>
+          <table class="table table-hover table-dark bg-transparent">
+            <thead class="bg-dark">
               <tr>
                 <th v-for="heading in headings" scope="col">{{ heading }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, i) in sheet.data">
+              <tr v-for="(row, i) in visibleRows">
                   <td v-for="(value, key) in row" :scope="(i) ? 'row' : 'col'">
                       <h3 class="heading small d-block d-md-none">{{ key }}</h3>
                       <div class="body">{{ value }}</div>
@@ -27,9 +37,10 @@
 <script>
   import axios from 'axios'
   import is from 'is_js'
+  // import {default as gsheets} from 'gsheets'
 
-  require('isomorphic-fetch');
-  const gsheets = require('gsheets');
+  require('isomorphic-fetch')
+  const gsheets = require('gsheets')
 
   export default {
     props: {
@@ -46,6 +57,7 @@
       return {
         loading: true,
         sheet: null,
+        search: ''
       }
     },
     computed: {
@@ -54,6 +66,55 @@
         if (!this.sheet || is.empty(this.sheet.data)) return null
 
         return Object.keys(this.sheet.data[0])
+      },
+      // A list of functions populated by conditions
+      activeFilters () {
+        let filters = []
+
+        // If there is something in the search field
+        // then add the searchFilter to activeFilters
+        if (is.not.empty(this.search)) filters.push(this.searchFilter)
+
+        return filters
+      },
+      visibleRows () {
+        // We'll set this and make it mutable
+        let rows = this.sheet.data
+
+        // We'll loop through any active filters
+        this.activeFilters.forEach((activeFilter) => {
+          // Write over previous row set
+          rows = rows.filter(activeFilter)
+          // and since we're in a loop do it again
+          // if there's another activeFilter but
+          // this time with possibly less rows
+          // so the filtering gets progressively
+          // faster
+        })
+
+        // Return what's left
+        return rows
+      }
+    },
+    methods: {
+      searchFilter (row) {
+        // Get the search string and convert
+        // it to lowercase so we can compare
+        // it in a case insensitive way
+        const searchString = this.search.toLowerCase()
+
+        // Determine if the searchString is in
+        // the cell we are current looking at.
+        // Converts the cell contents to lowercase.
+        const includesSearchValue = (cell) => String(cell).toLowerCase().includes(searchString)
+
+        // Map through the row to see if cells
+        // match the search value.
+        // ex: [true, false, false, true, etc...]
+        const results = Object.values(row).map((cell) => includesSearchValue(cell))
+
+        // Return true if any cells match
+        return is.any.truthy(results)
       }
     },
     mounted () {
