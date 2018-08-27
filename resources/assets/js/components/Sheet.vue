@@ -11,7 +11,7 @@
             <tbody>
               <tr v-for="(row, i) in sheet.data">
                   <td v-for="(value, key) in row" :scope="(i) ? 'row' : 'col'">
-                      <h3 class="heading small">{{ key }}</h3>
+                      <h3 class="heading small d-block d-md-none">{{ key }}</h3>
                       <div class="body">{{ value }}</div>
                   </td>
               </tr>
