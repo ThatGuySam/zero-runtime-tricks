@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div v-if="!loading" class="container">
       <template v-if="sheet">
         <div class="table-responsive-lg">
           <table class="table table-hover table-dark">
@@ -21,6 +21,7 @@
       </template>
       <template v-else>No data found</template>
     </div>
+    <div v-else class="display-4 text-center py-5">Loading...</div>
 </template>
 
 <script>
