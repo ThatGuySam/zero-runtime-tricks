@@ -41,6 +41,7 @@
         "popper.js": "^1.12",
         "random-words": "^1.1.0",
         "vue": "^2.5.17",
-        "vue-form": "^4.9.0"
+        "vue-form": "^4.9.0",
+        "vue-template-compiler": "^2.5.17"
     }
 }
