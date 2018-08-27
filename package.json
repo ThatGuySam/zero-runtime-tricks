@@ -14,7 +14,7 @@
         "lint": "./node_modules/.bin/eslint resources/assets/js --ext .vue",
         "fix": "npm run lint -- --fix",
         "stage": "yarn production && now --static",
-        "deploy-live": "now alias"
+        "deploy": "netlifyctl deploy"
     },
     "devDependencies": {
         "browser-sync": "^2.24.4",
