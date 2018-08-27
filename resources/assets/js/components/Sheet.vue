@@ -13,18 +13,25 @@
               v-model="search">
           </form>
           <table class="table table-hover table-dark bg-transparent">
-            <thead class="bg-dark">
+            <thead v-if="hasVisibleRows" class="bg-dark">
               <tr>
                 <th v-for="heading in headings" scope="col">{{ heading }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, i) in visibleRows" class="border-secondary border-bottom">
+              <tr
+                v-for="(row, i) in visibleRows"
+                class="border-secondary border-bottom">
                   <td v-for="(value, key) in row" :scope="(i) ? 'row' : 'col'" class="d-block d-sm-table-cell border-0">
                       <h3 class="badge text-left d-block d-sm-none bg-dark p-3">{{ key }}</h3>
                       <div class="body px-4 px-sm-0">{{ value }}</div>
                   </td>
               </tr>
+              <div v-if="!hasVisibleRows">
+                <div class="h2 text-center p-5">
+                  <strong>{{ this.search }}</strong> did not match anything
+                </div>
+              </div>
             </tbody>
           </table>
         </div>
@@ -94,6 +101,9 @@
 
         // Return what's left
         return rows
+      },
+      hasVisibleRows () {
+        return this.visibleRows.length !== 0
       }
     },
     methods: {
