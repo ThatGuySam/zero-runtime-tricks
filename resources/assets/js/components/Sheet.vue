@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="!loading"
-    class="sheet-container container">
+    class="sheet-container container-fluid">
     <template v-if="sheet">
       <div class="table-responsive-lg py-5">
         <div class="container-fluid">
@@ -30,7 +30,8 @@
               <th
                 v-for="(heading, i) in headings"
                 :key="i"
-                scope="col">{{ heading }}</th>
+                scope="col"
+                :class="`table-heading-${i} table-heading-${makeSlug(heading)}`">{{ heading }}</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +45,7 @@
                 :scope="(i) ? 'row' : 'col'"
                 class="d-block d-sm-table-cell border-0">
                 <h3 class="badge text-left d-block d-sm-none bg-light p-3">{{ key }}</h3>
-                <div class="body px-4 px-sm-0">{{ value }}</div>
+                <div class="table-cell body px-4 px-sm-0">{{ value }}</div>
               </td>
             </tr>
             <div v-if="!hasVisibleRows">
@@ -66,6 +67,7 @@
 <script>
   // import axios from 'axios'
   import is from 'is_js'
+  import { makeSlug } from '../helpers'
   // import {default as gsheets} from 'gsheets'
 
   require('isomorphic-fetch')
@@ -139,6 +141,7 @@
         })
     },
     methods: {
+      makeSlug,
       searchFilter (row) {
         // Get the search string and convert
         // it to lowercase so we can compare
