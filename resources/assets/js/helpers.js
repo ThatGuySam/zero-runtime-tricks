@@ -1,3 +1,5 @@
+import slugify from 'slugify'
+
 export const trimCharacter = (string, character) => {
   let trimmie = string
   
@@ -13,3 +15,13 @@ export const trimCharacter = (string, character) => {
   
   return trimmie
 }
+
+// https://www.npmjs.com/package/slugify
+export const makeSlug = (string) => slugify(string, {
+  // replace spaces with replacement
+  replacement: '-',
+  // regex to remove characters
+  remove: null,
+  // result in lower case
+  lower: true
+})
