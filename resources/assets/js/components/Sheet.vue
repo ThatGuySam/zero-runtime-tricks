@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="sheet-container"
     v-if="!loading"
     class="sheet-container container-fluid">
     <template v-if="sheet">
@@ -76,6 +77,8 @@
   require('isomorphic-fetch')
   const gsheets = require('gsheets')
 
+  const urlParams = new URLSearchParams(window.location.search)
+
   export default {
     props: {
       sheetId: {
@@ -97,6 +100,9 @@
     computed: {
       hasSearchInputText () {
         return is.not.empty(this.search)
+      },
+      urlSearchParameter () {
+        return urlParams.get('capabilities-search')
       },
       headings () {
         // Return empty
@@ -136,8 +142,8 @@
         return this.visibleRows.length !== 0
       }
     },
-    mounted () {
-      gsheets.getWorksheet(this.sheetId, this.worksheet).
+    async mounted () {
+      await gsheets.getWorksheet(this.sheetId, this.worksheet).
         then((res) => {
           // console.log(res)
           this.sheet = res
@@ -145,6 +151,11 @@
         }, (err) => {
           throw new Error(err)
         })
+
+        if (is.string(this.urlSearchParameter)) {
+          this.search = this.urlSearchParameter
+          this.$refs['sheet-container'].scrollIntoView()
+        }
     },
     methods: {
       makeSlug,
