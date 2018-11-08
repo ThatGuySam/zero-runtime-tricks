@@ -1,48 +1,64 @@
 <template>
-    <div v-if="!loading" class="sheet-container container">
-      <template v-if="sheet">
-        <div class="table-responsive-lg py-5">
-          <form class="form-inline justify-content-end">
-            <label class="sr-only" for="searchCapabilities">Search Capabilities</label>
-            <input
-              type="text"
-              class="form-control text-light bg-transparent mb-2 ml-sm-2"
-              id="searchCapabilities"
-              placeholder="Search"
+  <div
+    v-if="!loading"
+    class="sheet-container container">
+    <template v-if="sheet">
+      <div class="table-responsive-lg py-5">
+        <form class="form-inline justify-content-end">
+          <label
+            class="sr-only"
+            for="searchCapabilities">Search Capabilities</label>
+          <input
+            id="searchCapabilities"
+            v-model="search"
+            type="text"
+            class="form-control text-light bg-transparent mb-2 ml-sm-2"
 
-              v-model="search">
-          </form>
-          <table class="table table-hover bg-transparent">
-            <thead v-if="hasVisibleRows" class="bg-light">
-              <tr>
-                <th v-for="heading in headings" scope="col">{{ heading }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="(row, i) in visibleRows"
-                class="border-secondary border-bottom">
-                  <td v-for="(value, key) in row" :scope="(i) ? 'row' : 'col'" class="d-block d-sm-table-cell border-0">
-                      <h3 class="badge text-left d-block d-sm-none bg-dark p-3">{{ key }}</h3>
-                      <div class="body px-4 px-sm-0">{{ value }}</div>
-                  </td>
-              </tr>
-              <div v-if="!hasVisibleRows">
-                <div class="h2 text-center p-5">
-                  <strong>{{ this.search }}</strong> did not match anything
-                </div>
+            placeholder="Search">
+        </form>
+        <table class="table table-hover bg-transparent">
+          <thead
+            v-if="hasVisibleRows"
+            class="bg-light">
+            <tr>
+              <th
+                v-for="(heading, i) in headings"
+                :key="i"
+                scope="col">{{ heading }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(row, i) in visibleRows"
+              :key="i"
+              class="border-secondary border-bottom">
+              <td
+                v-for="(value, key) in row"
+                :key="key"
+                :scope="(i) ? 'row' : 'col'"
+                class="d-block d-sm-table-cell border-0">
+                <h3 class="badge text-left d-block d-sm-none bg-dark p-3">{{ key }}</h3>
+                <div class="body px-4 px-sm-0">{{ value }}</div>
+              </td>
+            </tr>
+            <div v-if="!hasVisibleRows">
+              <div class="h2 text-center p-5">
+                <strong>{{ search }}</strong> did not match anything
               </div>
-            </tbody>
-          </table>
-        </div>
-      </template>
-      <template v-else>No data found</template>
-    </div>
-    <div v-else class="display-4 text-center py-5">Loading...</div>
+            </div>
+          </tbody>
+        </table>
+      </div>
+    </template>
+    <template v-else>No data found</template>
+  </div>
+  <div
+    v-else
+    class="display-4 text-center py-5">Loading...</div>
 </template>
 
 <script>
-  import axios from 'axios'
+  // import axios from 'axios'
   import is from 'is_js'
   // import {default as gsheets} from 'gsheets'
 
@@ -60,7 +76,7 @@
         required: true
       }
     },
-    data: function () {
+    data () {
       return {
         loading: true,
         sheet: null,
@@ -76,7 +92,7 @@
       },
       // A list of functions populated by conditions
       activeFilters () {
-        let filters = []
+        const filters = []
 
         // If there is something in the search field
         // then add the searchFilter to activeFilters
@@ -106,6 +122,16 @@
         return this.visibleRows.length !== 0
       }
     },
+    mounted () {
+      gsheets.getWorksheet(this.sheetId, this.worksheet).
+        then((res) => {
+          // console.log(res)
+          this.sheet = res
+          this.loading = false
+        }, (err) => {
+          throw new Error(err)
+        })
+    },
     methods: {
       searchFilter (row) {
         // Get the search string and convert
@@ -116,7 +142,8 @@
         // Determine if the searchString is in
         // the cell we are current looking at.
         // Converts the cell contents to lowercase.
-        const includesSearchValue = (cell) => String(cell).toLowerCase().includes(searchString)
+        const includesSearchValue = (cell) => String(cell).toLowerCase().
+includes(searchString)
 
         // Map through the row to see if cells
         // match the search value.
@@ -127,13 +154,5 @@
         return is.any.truthy(results)
       }
     },
-    mounted () {
-      gsheets.getWorksheet(this.sheetId, this.worksheet)
-        .then(res => {
-          console.log(res)
-          this.sheet = res
-          this.loading = false
-        }, err => console.error(err));
-    }
   }
 </script>
