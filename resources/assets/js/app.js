@@ -18,5 +18,5 @@ window.Vue = require('vue')
 Vue.component('sheet', require('./components/Sheet.vue'));
 
 const app = new Vue({
-  el: '#app'
+  el: '#capabilities-list'
 })
