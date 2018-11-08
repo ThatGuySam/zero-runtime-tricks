@@ -12,8 +12,8 @@
 
               v-model="search">
           </form>
-          <table class="table table-hover table-dark bg-transparent">
-            <thead v-if="hasVisibleRows" class="bg-dark">
+          <table class="table table-hover bg-transparent">
+            <thead v-if="hasVisibleRows" class="bg-light">
               <tr>
                 <th v-for="heading in headings" scope="col">{{ heading }}</th>
               </tr>
