@@ -4,18 +4,24 @@
     class="sheet-container container">
     <template v-if="sheet">
       <div class="table-responsive-lg py-5">
-        <form class="form-inline justify-content-end">
-          <label
-            class="sr-only"
-            for="searchCapabilities">Search Capabilities</label>
-          <input
-            id="searchCapabilities"
-            v-model="search"
-            type="text"
-            class="form-control text-light bg-transparent mb-2 ml-sm-2"
-
-            placeholder="Search">
-        </form>
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <form class="form col-lg-6">
+              <div class="form-group">
+                <label
+                  class="sr-only"
+                  for="searchCapabilities">Search Capabilities</label>
+                <input
+                  id="searchCapabilities"
+                  v-model="search"
+                  type="text"
+                  class="capabilities-search-input form-control form-control-lg bg-transparent mb-4 "
+                  placeholder="Search" />
+                <small id="search-help" class="form-text text-muted">ex: Keyword or Part Number</small>
+              </div>
+            </form>
+          </div>
+        </div>
         <table class="table table-hover bg-transparent">
           <thead
             v-if="hasVisibleRows"
@@ -37,7 +43,7 @@
                 :key="key"
                 :scope="(i) ? 'row' : 'col'"
                 class="d-block d-sm-table-cell border-0">
-                <h3 class="badge text-left d-block d-sm-none bg-dark p-3">{{ key }}</h3>
+                <h3 class="badge text-left d-block d-sm-none bg-light p-3">{{ key }}</h3>
                 <div class="body px-4 px-sm-0">{{ value }}</div>
               </td>
             </tr>
