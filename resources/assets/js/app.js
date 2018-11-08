@@ -15,8 +15,8 @@ window.Vue = require('vue')
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('sheet', require('./components/Sheet.vue'));
+window.Vue.component('sheet', require('./components/Sheet.vue'));
 
-const app = new Vue({
+window.app = new window.Vue({
   el: '#capabilities-list'
 })
