@@ -22,7 +22,10 @@
             </form>
           </div>
         </div>
-        <table class="table table-hover bg-transparent">
+        <table
+          v-if="hasSearchInputText"
+          class="table table-hover bg-transparent"
+        >
           <thead
             v-if="hasVisibleRows"
             class="bg-light">
@@ -92,6 +95,9 @@
       }
     },
     computed: {
+      hasSearchInputText () {
+        return is.not.empty(this.search)
+      },
       headings () {
         // Return empty
         if (!this.sheet || is.empty(this.sheet.data)) return null
@@ -104,7 +110,7 @@
 
         // If there is something in the search field
         // then add the searchFilter to activeFilters
-        if (is.not.empty(this.search)) filters.push(this.searchFilter)
+        if (this.hasSearchInputText) filters.push(this.searchFilter)
 
         return filters
       },
