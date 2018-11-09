@@ -7,13 +7,14 @@
       <div class="table-responsive-lg py-5">
         <div class="container-fluid">
           <div class="row justify-content-center">
-            <form class="form col-lg-6">
+            <form class="form col-lg-6" @submit.prevent>
               <div class="form-group">
                 <label
                   class="sr-only"
                   for="searchCapabilities">Search Capabilities</label>
                 <input
                   id="searchCapabilities"
+                  name="capabilities-search"
                   v-model="search"
                   type="text"
                   class="capabilities-search-input form-control form-control-lg bg-transparent mb-4 "
