@@ -1,5 +1,7 @@
 import 'url-search-params-polyfill'
 
+import Sheet from './components/Sheet.vue'
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -16,7 +18,7 @@ window.Vue = require('vue')
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-window.Vue.component('sheet', require('./components/Sheet.vue'));
+window.Vue.component('sheet', Sheet);
 
 window.app = new window.Vue({
   el: '#capabilities-list'

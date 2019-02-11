@@ -17,6 +17,9 @@
         "deploy": "netlifyctl deploy"
     },
     "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
         "browser-sync": "^2.24.4",
         "browser-sync-webpack-plugin": "2.0.1",
         "cross-env": "^5.2.0",
@@ -27,9 +30,13 @@
         "eslint-plugin-promise": "^3.8.0",
         "eslint-plugin-standard": "^3.1.0",
         "eslint-plugin-vue": "^4.5.0",
-        "laravel-mix": "^2.1.14"
+        "laravel-mix": "^4.0.14",
+        "resolve-url-loader": "2.3.1",
+        "sass": "^1.17.0",
+        "sass-loader": "7.*"
     },
     "dependencies": {
+        "@babel/polyfill": "^7.2.5",
         "axios": "^0.18",
         "bootstrap": "^4.1.1",
         "gsheets": "^2.0.0",
