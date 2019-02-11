@@ -50,4 +50,5 @@ mix.browserSync({
 })
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
+  .babel('public/js/app.js', 'public/js/app.es5.js')
+  .sass('resources/assets/sass/app.scss', 'public/css')
