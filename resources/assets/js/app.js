@@ -1,4 +1,5 @@
 import 'url-search-params-polyfill'
+import '@babel/polyfill'
 
 import Sheet from './components/Sheet.vue'
 
