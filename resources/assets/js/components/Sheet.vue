@@ -56,18 +56,10 @@
   import is from 'is_js'
   import LZString from 'lznext'
   // import { Collapse } from 'bootstrap.native'
+  import Autolinker from 'autolinker'
+  import { escapeHTML } from '../helpers'
 
   export default {
-    // props: {
-    //   sheetId: {
-    //     type: String,
-    //     required: true
-    //   },
-    //   worksheet: {
-    //     type: String,
-    //     required: true
-    //   }
-    // },
     data () {
       return {
         loading: true,
@@ -98,6 +90,24 @@
         if (is.not.domNode(this.$refs.copy)) return 'auto'
 
         return `${this.$refs.copy.scrollHeight}px`
+      },
+      makeLinksClickableWhenHovered () {
+        const links = this.$refs.copy.querySelectorAll('a')
+
+        links.forEach(link => {
+          const initialValue = link.contentEditable
+          link.onmouseover = () => {
+            link.contentEditable = false
+          }
+          link.onmouseout = () => {
+            link.contentEditable = initialValue
+          }
+          
+          // If we click and we're still editable
+          link.ontouchend = () => {
+            if (link.contentEditable) window.location.href = link.href
+          }
+        })
       }
     },
     mounted () {
@@ -116,8 +126,14 @@
         // Size textareaHeight
         this.textareaHeight = this.getTextareaHeight()
 
-        this.$refs.copy.innerHTML = this.copy
+        const escaped = escapeHTML(this.copy)
+        const linked = Autolinker.link(escaped, {
+          stripPrefix: false
+        })
+        this.$refs.copy.innerHTML = linked
         this.$refs.copy.focus()
+
+        this.makeLinksClickableWhenHovered()
       })
     },
     watch: {

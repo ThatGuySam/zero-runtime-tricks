@@ -25,3 +25,9 @@ export const makeSlug = (string) => slugify(string, {
   // result in lower case
   lower: true
 })
+
+const escape = document.createElement('textarea')
+export const escapeHTML = (html) => {
+    escape.textContent = html
+    return escape.innerHTML
+}
