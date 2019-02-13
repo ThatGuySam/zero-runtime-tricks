@@ -123,6 +123,10 @@
       compressedCopy: function (compressedCopy) {
         this.textareaHeight = this.getTextareaHeight()
 
+        if (!this.hasCopy) {
+          return history.replaceState(null, null, '/')
+        }
+
         history.replaceState(null, null, compressedCopy)
       }
     }
