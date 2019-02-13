@@ -2,27 +2,24 @@
 // @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Bootstrap
-#capabilities-list {
-  @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
-  //https://github.com/twbs/bootstrap/tree/v4.1.1
+//https://github.com/twbs/bootstrap/tree/v4.1.1
 
-  // Bootstrap Common
-  // @import '~bootstrap/scss/functions';
-  // @import '~bootstrap/scss/variables';
-  // @import '~bootstrap/scss/mixins';
-  // @import '~bootstrap/scss/utilities';
+// Bootstrap Common
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~bootstrap/scss/utilities';
 
-  // @import '~bootstrap/scss/reboot';
-  // @import '~bootstrap/scss/grid';
-  // @import '~bootstrap/scss/buttons';
+// @import '~bootstrap/scss/reboot';
+// @import '~bootstrap/scss/grid';
+// @import '~bootstrap/scss/buttons';
 
-  // Variables
-  @import "variables";
+// Variables
+@import "variables";
 
-  @import 'components';
-
-}
+@import 'components';
 
 // body {
 //   // background: #323232;
