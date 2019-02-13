@@ -44,6 +44,7 @@ mix.webpackConfig({
 
 mix.browserSync({
     proxy: false,
+    single: true,
     server: {
       baseDir: '.'
     }
