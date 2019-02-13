@@ -27,16 +27,17 @@
               </div>
 
               <div class="form-group">
-                <textarea
+                <div
                   ref="copy"
                   id="copy"
                   name="copy-input"
-                  v-model="copy"
                   type="text"
                   class="copy-input form-control form-control-lg bg-transparent border-0 shadow-none mb-4"
                   placeholder="Type anything..."
-                  :style="textareaStyles"
-                  autofocus />
+                  contenteditable="true"
+                  autofocus
+                  style="height: auto; white-space: pre;"
+                  @input="updateCopy" />
               </div>
 
             </form>
@@ -87,22 +88,19 @@
       },
       shareLink () {
         return `${window.location.protocol}//${window.location.host}/${this.compressedCopy}`
-      },
-      textareaStyles () {
-        return {
-          height: this.textareaHeight,
-          overflowY: 'hidden'
-        }
       }
     },
     methods: {
+      updateCopy (event) {
+        this.copy = event.target.innerText || event.target.textContent
+      },
       getTextareaHeight () {
         if (is.not.domNode(this.$refs.copy)) return 'auto'
 
         return `${this.$refs.copy.scrollHeight}px`
       }
     },
-    async mounted () {
+    mounted () {
       const path = window.location.pathname.split('/')
       const compressedCopy = decodeURI(path[1])
       const decompressed = LZString.decompressFromUTF16(compressedCopy)
@@ -117,6 +115,9 @@
 
         // Size textareaHeight
         this.textareaHeight = this.getTextareaHeight()
+
+        this.$refs.copy.innerHTML = this.copy
+        this.$refs.copy.focus()
       })
     },
     watch: {
