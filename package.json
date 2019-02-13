@@ -36,6 +36,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.2.5",
+        "autolinker": "^3.0.0",
         "axios": "^0.18",
         "bootstrap": "^4.3.1",
         "bootstrap.native": "^2.0.25",
