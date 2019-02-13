@@ -7,6 +7,25 @@
         <div class="container-fluid">
           <div class="row justify-content-center">
             <form class="form col-lg-6" @submit.prevent>
+
+              <div class="form-row justify-content-end" :style="`opacity: ${Number(hasCopy)}`">
+                <button
+                  class="btn btn-link text-secondary"
+                  type="button"
+                  @click="shareLinkOpen = !shareLinkOpen"
+                >Share</button>
+              </div>
+
+              <div v-if="shareLinkOpen" class="form-group">
+                <input
+                  name="sharelink-input"
+                  v-model="shareLink"
+                  type="text"
+                  class="sharelink-input form-control text-center mb-4"
+                  placeholder="Type anything..."
+                  readonly />
+              </div>
+
               <div class="form-group">
                 <textarea
                   ref="copy"
@@ -19,6 +38,7 @@
                   :style="textareaStyles"
                   autofocus />
               </div>
+
             </form>
           </div>
         </div>
@@ -34,29 +54,41 @@
   // import axios from 'axios'
   import is from 'is_js'
   import LZString from 'lznext'
+  // import { Collapse } from 'bootstrap.native'
 
   export default {
-    props: {
-      sheetId: {
-        type: String,
-        required: true
-      },
-      worksheet: {
-        type: String,
-        required: true
-      }
-    },
+    // props: {
+    //   sheetId: {
+    //     type: String,
+    //     required: true
+    //   },
+    //   worksheet: {
+    //     type: String,
+    //     required: true
+    //   }
+    // },
     data () {
       return {
         loading: true,
+        shareLinkOpen: false,
         textareaHeight: 'auto',
         copy: ''
       }
     },
     computed: {
-      textareaStyles () {
-        console.log('this.$refs.copy', this.$refs.copy)
+      hasCopy () {
+        return is.not.empty(this.copy)
+      },
+      compressedCopy () {
+        // If it's an empty string then just return nothing
+        if (!this.hasCopy) return ''
 
+        return LZString.compressToUTF16(this.copy)
+      },
+      shareLink () {
+        return `${window.location.protocol}//${window.location.host}/${this.compressedCopy}`
+      },
+      textareaStyles () {
         return {
           height: this.textareaHeight,
           overflowY: 'hidden'
@@ -65,7 +97,6 @@
     },
     methods: {
       getTextareaHeight () {
-        console.log('this.$refs.copy', typeof this.$refs.copy)
         if (is.not.domNode(this.$refs.copy)) return 'auto'
 
         return `${this.$refs.copy.scrollHeight}px`
@@ -83,16 +114,15 @@
       this.$nextTick(function () {
         // Code that will run only after the
         // entire view has been rendered
-        
+
         // Size textareaHeight
         this.textareaHeight = this.getTextareaHeight()
       })
     },
     watch: {
-      copy: function (copy) {
+      compressedCopy: function (compressedCopy) {
         this.textareaHeight = this.getTextareaHeight()
 
-        const compressedCopy = LZString.compressToUTF16(copy)
         history.replaceState(null, null, compressedCopy)
       }
     }
