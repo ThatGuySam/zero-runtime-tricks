@@ -9,8 +9,9 @@
             <form class="form col-lg-6" @submit.prevent>
 
               <div class="form-group text-center">
-                <template v-if="badNumber">
-                  <strong>{{ badNumber }}</strong> is not averagable
+                <template v-if="badNumber">                  
+                  <div class="display-4 font-weight-bold">{{ badNumber }}</div>
+                  <div class="average-descriptor text-muted">is not averagable</div>
                 </template>
                 <template v-else>
                   <div class="average-descriptor text-muted">The average is</div>
