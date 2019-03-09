@@ -11,7 +11,7 @@
 # Production context: all deploys from the Production branch set in your site's 
 # deploy contexts will inherit these settings.
 [context.production]
-  command = "yarn prod"
+  command = "npm run prod"
   environment = { NODE_VERSION = "11.7.0" }
 
 # The following redirect is intended for use with most SPAs that handle
