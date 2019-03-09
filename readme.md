@@ -1,3 +1,3 @@
-# Content Compressor
+# Quick Average
 
-Compresses text content into a sharable URL
+Quickly gets the average of numbers for you
