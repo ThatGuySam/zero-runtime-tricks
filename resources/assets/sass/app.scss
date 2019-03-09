@@ -19,11 +19,11 @@
 // Variables
 @import "variables";
 
+@import 'forms';
+
 @import 'components';
 
-// body {
-//   // background: #323232;
-//   color: #323232;
-
-//   font-family: $font-family-base;
-// }
+body {
+  background: #282828;
+  color: #f1f1f1;
+}

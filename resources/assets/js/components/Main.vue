@@ -10,8 +10,8 @@
 
               <div class="form-group text-center">
                 <template v-if="badNumber">                  
-                  <div class="display-4 font-weight-bold">{{ badNumber }}</div>
-                  <div class="average-descriptor text-muted">is not averagable</div>
+                  <div class="display-4 font-weight-bold text-warning">{{ badNumber }}</div>
+                  <div class="average-descriptor text-warning">is not averagable</div>
                 </template>
                 <template v-else>
                   <div class="average-descriptor text-muted">The average is</div>
@@ -25,12 +25,12 @@
                   id="copy"
                   name="copy-input"
                   type="text"
-                  class="copy-input form-control form-control-lg bg-transparent border-0 shadow-none mb-4"
-                  placeholder="Type anything..."
+                  class="copy-input form-control form-control-lg text-white-50 bg-transparent border-light shadow-none mb-4"
+                  placeholder="Type a few numbers."
                   contenteditable="true"
                   autofocus
-                  style="height: auto; white-space: pre;"
-                  @input="updateCopy" />
+                  style="min-height: 8em; height: auto; white-space: pre;"
+                  @input="updateCopy">9<br>1<br>8</div>
               </div>
 
             </form>
@@ -124,6 +124,8 @@
 
         // Size textareaHeight
         this.textareaHeight = this.getTextareaHeight()
+
+        this.copy = this.$refs.copy.innerText
 
         // this.$refs.copy.innerHTML = linked
         this.$refs.copy.focus()

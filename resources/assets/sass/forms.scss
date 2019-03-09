@@ -1,2 +1,7 @@
 // Bootstrap Forms
-@import '~bootstrap/scss/forms';
+// @import '~bootstrap/scss/forms';
+
+div[placeholder]:focus:empty::before {
+    content: attr(placeholder);
+    color: rgba(255, 255, 255, .2); 
+}
