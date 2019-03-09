@@ -24,11 +24,12 @@
                   ref="copy"
                   id="copy"
                   name="copy-input"
-                  type="text"
                   class="copy-input form-control form-control-lg text-white-50 bg-transparent border-light shadow-none mb-4"
                   placeholder="Type a few numbers."
                   contenteditable="true"
-                  pattern="\d*"
+                  type="number"
+                  pattern="[0-9]*"
+                  inputmode="numeric"
                   autofocus
                   style="min-height: 8em; height: auto; white-space: pre;"
                   @input="updateCopy">9<br>1<br>8</div>
