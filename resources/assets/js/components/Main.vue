@@ -49,7 +49,7 @@
   import is from 'is_js'
   // import { Collapse } from 'bootstrap.native'
   // import Autolinker from 'autolinker'
-  import { splitByLineBreaks } from '../helpers'
+  import { splitByLineBreaks, saveCopy, loadCopy } from '../helpers'
 
   export default {
     data () {
@@ -57,7 +57,6 @@
         loading: true,
         shareLinkOpen: false,
         textareaHeight: 'auto',
-        // badNumber: null,
         copy: ''
       }
     },
@@ -74,30 +73,30 @@
         this.lines.forEach((line, i) => {
           const isNumber = Number.isInteger(Number(line))
 
-          console.log('line', line, i)
-          console.log('isNumber', isNumber)
-
-          if (!isNumber) {
+          if (badNumberIndex === null && !isNumber) {
             badNumberIndex = i
             return
           } 
         })
 
-        const badNumber = (Number(badNumberIndex) !== null) ? this.lines[badNumberIndex] : null
-
-        // console.log('badNumber', badNumber)
-        console.log('badNumberIndex', badNumberIndex)
-        console.log('badNumber', badNumber)
+        const badNumber = (badNumberIndex !== null) ? this.lines[badNumberIndex] : null
 
         return badNumber
       },
       average () {
-        // If there's a bad number stop
-        // if (this.badNumber !== null) return
+        // If there's no copy then the average is 0
+        if (is.empty(this.copy)) return 0
 
+        // If there's not a bad number save the copy
+        if (this.badNumber === null) saveCopy(this.copy)
+
+        // Get the numbers from our lines
         const numbers = this.lines.map(line => Number(line))
 
+        // Get average
         const realAverage = numbers.reduce((a, b) => a + b) / numbers.length
+
+        // Return rounded average
         return Math.round(realAverage)
       }
     },
@@ -125,9 +124,19 @@
         // Size textareaHeight
         this.textareaHeight = this.getTextareaHeight()
 
-        this.copy = this.$refs.copy.innerText
+        // Get the text from the initial load to use as the default copy
+        const defaultCopy = this.$refs.copy.innerText
+        // Load copy from local cache
+        const loadedCopy = loadCopy(defaultCopy)
 
-        // this.$refs.copy.innerHTML = linked
+        // Store loeaded copy
+        this.copy = loadedCopy
+        // Put the copy into our input since it's not modeled
+        this.$refs.copy.innerText = loadedCopy
+
+        console.log('loadedCopy', loadedCopy)
+
+        // Focus copy element
         this.$refs.copy.focus()
       })
     },

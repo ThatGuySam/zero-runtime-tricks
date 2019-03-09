@@ -1,4 +1,7 @@
+
+import is from 'is_js'
 import slugify from 'slugify'
+import {local} from 'brownies'
 
 export const trimCharacter = (string, character) => {
   let trimmie = string
@@ -34,3 +37,20 @@ export const escapeHTML = (html) => {
 
 // https://stackoverflow.com/a/21895354/1397641
 export const splitByLineBreaks = (string) => string.split(/[\r\n]+/)
+
+
+export const saveCopy = (copy) => {
+  console.log('Saving Copy', copy)
+  local.copy = copy
+}
+
+export const loadCopy = (initialValue = '') => {
+  // console.log('is.not.array(local.copy)', is.not.array(local.copy))
+  // console.log('local.copy', local.copy)
+  // If it's not give it the initial value
+  if (is.not.string(local.copy)) local.copy = initialValue
+
+  console.log('Loading Copy', local.copy)
+
+  return local.copy
+}
