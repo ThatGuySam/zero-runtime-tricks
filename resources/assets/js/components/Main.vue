@@ -1,29 +1,21 @@
 <template>
   <div
-    ref="sheet-container"
+    ref="copy-container"
     v-if="!loading"
-    class="sheet-container container-fluid">
+    class="copy-container container-fluid">
       <div class="table-responsive-lg py-5">
         <div class="container-fluid">
           <div class="row justify-content-center">
             <form class="form col-lg-6" @submit.prevent>
 
-              <div class="form-row justify-content-end" :style="`opacity: ${Number(hasCopy)}`">
-                <button
-                  class="btn btn-link text-secondary"
-                  type="button"
-                  @click="shareLinkOpen = !shareLinkOpen"
-                >Share</button>
-              </div>
-
-              <div v-if="shareLinkOpen" class="form-group">
-                <input
-                  name="sharelink-input"
-                  v-model="shareLink"
-                  type="text"
-                  class="sharelink-input form-control text-center mb-4"
-                  placeholder="Type anything..."
-                  readonly />
+              <div class="form-group text-center">
+                <template v-if="badNumber">
+                  <strong>{{ badNumber }}</strong> is not averagable
+                </template>
+                <template v-else>
+                  <div class="average-descriptor text-muted">The average is</div>
+                  <div class="display-4 font-weight-bold">{{ average }}</div>
+                </template>
               </div>
 
               <div class="form-group">
@@ -54,10 +46,9 @@
 <script>
   // import axios from 'axios'
   import is from 'is_js'
-  import LZString from 'lznext'
   // import { Collapse } from 'bootstrap.native'
-  import Autolinker from 'autolinker'
-  import { escapeHTML } from '../helpers'
+  // import Autolinker from 'autolinker'
+  import { splitByLineBreaks } from '../helpers'
 
   export default {
     data () {
@@ -65,6 +56,7 @@
         loading: true,
         shareLinkOpen: false,
         textareaHeight: 'auto',
+        // badNumber: null,
         copy: ''
       }
     },
@@ -72,14 +64,40 @@
       hasCopy () {
         return is.not.empty(this.copy)
       },
-      compressedCopy () {
-        // If it's an empty string then just return nothing
-        if (!this.hasCopy) return ''
-
-        return LZString.compressToUTF16(this.copy)
+      lines () {
+        return splitByLineBreaks(this.copy)
       },
-      shareLink () {
-        return `${window.location.protocol}//${window.location.host}/${this.compressedCopy}`
+      badNumber () {
+        let badNumberIndex = null
+
+        this.lines.forEach((line, i) => {
+          const isNumber = Number.isInteger(Number(line))
+
+          console.log('line', line, i)
+          console.log('isNumber', isNumber)
+
+          if (!isNumber) {
+            badNumberIndex = i
+            return
+          } 
+        })
+
+        const badNumber = (Number(badNumberIndex) !== null) ? this.lines[badNumberIndex] : null
+
+        // console.log('badNumber', badNumber)
+        console.log('badNumberIndex', badNumberIndex)
+        console.log('badNumber', badNumber)
+
+        return badNumber
+      },
+      average () {
+        // If there's a bad number stop
+        // if (this.badNumber !== null) return
+
+        const numbers = this.lines.map(line => Number(line))
+
+        const realAverage = numbers.reduce((a, b) => a + b) / numbers.length
+        return Math.round(realAverage)
       }
     },
     methods: {
@@ -90,32 +108,12 @@
         if (is.not.domNode(this.$refs.copy)) return 'auto'
 
         return `${this.$refs.copy.scrollHeight}px`
-      },
-      makeLinksClickableWhenHovered () {
-        const links = this.$refs.copy.querySelectorAll('a')
-
-        links.forEach(link => {
-          const initialValue = link.contentEditable
-          link.onmouseover = () => {
-            link.contentEditable = false
-          }
-          link.onmouseout = () => {
-            link.contentEditable = initialValue
-          }
-          
-          // If we click and we're still editable
-          link.ontouchend = () => {
-            if (link.contentEditable) window.location.href = link.href
-          }
-        })
       }
     },
     mounted () {
-      const path = window.location.pathname.split('/')
-      const compressedCopy = decodeURI(path[1])
-      const decompressed = LZString.decompressFromUTF16(compressedCopy)
+      // const path = window.location.pathname.split('/')
       
-      this.copy = decompressed
+      // this.copy = decompressed
 
       this.loading = false
 
@@ -126,14 +124,8 @@
         // Size textareaHeight
         this.textareaHeight = this.getTextareaHeight()
 
-        const escaped = escapeHTML(this.copy)
-        const linked = Autolinker.link(escaped, {
-          stripPrefix: false
-        })
-        this.$refs.copy.innerHTML = linked
+        // this.$refs.copy.innerHTML = linked
         this.$refs.copy.focus()
-
-        this.makeLinksClickableWhenHovered()
       })
     },
     watch: {

@@ -31,3 +31,6 @@ export const escapeHTML = (html) => {
     escape.textContent = html
     return escape.innerHTML
 }
+
+// https://stackoverflow.com/a/21895354/1397641
+export const splitByLineBreaks = (string) => string.split(/[\r\n]+/)

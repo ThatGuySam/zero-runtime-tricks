@@ -1,7 +1,7 @@
 import 'url-search-params-polyfill'
 import '@babel/polyfill'
 
-import Sheet from './components/Sheet.vue'
+import Main from './components/Main.vue'
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -19,8 +19,8 @@ window.Vue = require('vue')
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-window.Vue.component('sheet', Sheet);
+window.Vue.component('averager', Main);
 
 window.app = new window.Vue({
-  el: '#capabilities-list'
+  el: '#app'
 })
