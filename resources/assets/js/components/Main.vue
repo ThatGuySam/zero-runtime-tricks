@@ -110,7 +110,7 @@
       this.startTimer(10, () => {
         console.log('done')
 
-        window.location.replace('http://hiretulsatechgrads.com')
+        window.location.href = 'http://hiretulsatechgrads.com'
       })
 
       this.$nextTick(function () {
