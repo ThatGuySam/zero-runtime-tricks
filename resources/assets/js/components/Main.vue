@@ -8,14 +8,9 @@
       <div class="row justify-content-center">
         <div class="col-sm-4 text-center">
           <div class="h5">
-            Looks like you meant to go to hiretulsatechgrads.com
-          </div>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-sm-8 text-center py-5">
-          <div class="display-4">
+            Looks like you meant to go to <em>hire</em>tulsatechgrads.com
+            <br>
+            <br>
             Redirecting you in
           </div>
         </div>
