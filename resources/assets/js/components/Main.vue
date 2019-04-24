@@ -2,12 +2,12 @@
   <div
     ref="copy-container"
     v-if="!loading"
-    class="copy-container container py-5">
-    <div class="container-fluid minh-75">
+    class="copy-container container">
+    <div class="container-fluid minh-60 py-5">
 
       <div class="row justify-content-center">
         <div class="col-sm-4 text-center">
-          <div class="h3">
+          <div class="h5">
             Looks like you meant to go to hiretulsatechgrads.com
           </div>
         </div>
@@ -16,10 +16,19 @@
       <div class="row justify-content-center">
         <div class="col-sm-8 text-center py-5">
           <div class="display-4">
-            Redirecting you in {{ timeLeft }}
+            Redirecting you in
           </div>
         </div>
       </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-8 text-center">
+          <div class="display-1 font-weight-bold">
+            {{ timeLeft }}
+          </div>
+        </div>
+      </div>
+
     </div>
     
     <div class="container text-center">
