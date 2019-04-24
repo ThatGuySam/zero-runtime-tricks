@@ -19,7 +19,7 @@ window.Vue = require('vue')
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-window.Vue.component('averager', Main);
+window.Vue.component('vue', Main);
 
 window.app = new window.Vue({
   el: '#app'

@@ -1,3 +1,2 @@
-# Quick Average
+# Tulsa Tech Grads
 
-Quickly gets the average of numbers for you
