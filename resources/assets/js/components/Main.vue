@@ -57,7 +57,10 @@
     methods: {
       startTimer (duration, callback) {
         var timer = duration, minutes, seconds
+
         setInterval(() => {
+            if (timer < 0) return
+
             minutes = parseInt(timer / 60, 10)
             seconds = parseInt(timer % 60, 10)
 
@@ -68,7 +71,8 @@
             this.timeLeft = seconds
 
             if (--timer < 0) {
-                timer = duration
+              // Reset Timer
+              // timer = duration
 
                 callback()
             }
