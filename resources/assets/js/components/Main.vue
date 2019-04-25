@@ -27,7 +27,7 @@
     </div>
     
     <div class="container text-center">
-      This redirect brought to you courtesy of <br>Sam Carlton -Tulsa Tech Grad
+      This redirect brought to you courtesy of <br>Sam Carlton - Tulsa Tech Grad
     </div>
     
   </div>
