@@ -8,18 +8,13 @@
       <div class="row justify-content-center">
         <div class="col-sm-4 text-center">
           <div class="h5">
-            Looks like you meant to go to <em>hire</em>tulsatechgrads.com
+            Looks like you meant to go to <a href="http://hiretulsatechgrads.com/"><em>hire</em>tulsatechgrads.com</a>
             <br>
             <br>
-            Redirecting you in
-          </div>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-sm-8 text-center">
-          <div class="display-1 font-weight-bold">
-            {{ timeLeft }}
+            <a
+              href="http://hiretulsatechgrads.com/"
+              class="btn btn-default"
+            >Go there now</a>
           </div>
         </div>
       </div>
@@ -27,7 +22,7 @@
     </div>
     
     <div class="container text-center">
-      This redirect brought to you courtesy of <br>Sam Carlton - Tulsa Tech Grad
+      This message brought to you courtesy of <br><a href="https://samcarlton.com/">Sam Carlton</a> - Tulsa Tech Grad
     </div>
     
   </div>
