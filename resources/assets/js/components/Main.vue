@@ -8,18 +8,13 @@
       <div class="row justify-content-center">
         <div class="col-sm-4 text-center">
           <div class="h5">
-            Looks like you meant to go to <em>hire</em>tulsatechgrads.com
+            Looks like you meant to go to <a href="http://hiretulsatechgrads.com/"><em>hire</em>tulsatechgrads.com</a>
             <br>
             <br>
-            Redirecting you in
-          </div>
-        </div>
-      </div>
-
-      <div class="row justify-content-center">
-        <div class="col-sm-8 text-center">
-          <div class="display-1 font-weight-bold">
-            {{ timeLeft }}
+            <a
+              href="http://hiretulsatechgrads.com/"
+              class="btn btn-outline-light"
+            >Go to <em>hire</em>tulsatechgrads.com</a>
           </div>
         </div>
       </div>
@@ -27,7 +22,7 @@
     </div>
     
     <div class="container text-center">
-      This redirect brought to you courtesy of <br>Sam Carlton - Tulsa Tech Grad
+      This message brought to you courtesy of <br><a href="https://samcarlton.com/">Sam Carlton</a> - Tulsa Tech Grad
     </div>
     
   </div>
@@ -86,11 +81,11 @@
 
       this.loading = false
 
-      this.startTimer(10, () => {
-        console.log('done')
+      // this.startTimer(10, () => {
+      //   console.log('done')
 
-        window.location.href = 'http://hiretulsatechgrads.com'
-      })
+      //   window.location.href = 'http://hiretulsatechgrads.com'
+      // })
 
       this.$nextTick(function () {
         // Code that will run only after the
