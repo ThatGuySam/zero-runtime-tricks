@@ -13,8 +13,8 @@
             <br>
             <a
               href="http://hiretulsatechgrads.com/"
-              class="btn btn-default"
-            >Go there now</a>
+              class="btn btn-outline-light"
+            >Go to <em>hire</em>tulsatechgrads.com</a>
           </div>
         </div>
       </div>
