@@ -86,11 +86,11 @@
 
       this.loading = false
 
-      this.startTimer(10, () => {
-        console.log('done')
+      // this.startTimer(10, () => {
+      //   console.log('done')
 
-        window.location.href = 'http://hiretulsatechgrads.com'
-      })
+      //   window.location.href = 'http://hiretulsatechgrads.com'
+      // })
 
       this.$nextTick(function () {
         // Code that will run only after the
