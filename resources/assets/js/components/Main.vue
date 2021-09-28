@@ -8,13 +8,13 @@
       <div class="row justify-content-center">
         <div class="col-sm-4 text-center">
           <div class="h5">
-            Looks like you meant to go to <a href="http://hiretulsatechgrads.com/"><em>hire</em>tulsatechgrads.com</a>
+        Looks like you meant to go to <a href="https://css-tricks.com/"><em>css</em>-tricks.com</a>
             <br>
             <br>
             <a
-              href="http://hiretulsatechgrads.com/"
+              href="https://css-tricks.com"
               class="btn btn-outline-light"
-            >Go to <em>hire</em>tulsatechgrads.com</a>
+            >Go to <em>css</em>-tricks.com</a>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
     </div>
     
     <div class="container text-center">
-      This message brought to you courtesy of <br><a href="https://samcarlton.com/">Sam Carlton</a> - Tulsa Tech Grad
+      This message brought to you courtesy of <br><a href="https://samcarlton.com/">Sam Carlton</a>
     </div>
     
   </div>
